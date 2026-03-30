@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrar Productos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Barra de nav -->
+        <header>
+            <div class="logo">
+                <img src="logo/logotipoRaza.jpg" alt="logo raza">
+                <h1>Terrier Life</h1>
+            </div>
+
+            <button id= "abrir"class="abrir-menu">☰</button> 
+            <div class="overlay"></div>
+                <nav class="nav" id="nav">
+                    <button id="cerrar" class="cerrar-menu">✖</button>
+                        <ul class="nav-list">
+                            <li><a href="index.html">Inicio</a></li>
+                            <li><a href="miperro.html">Mi perrito</a></li>
+                            <li><a href="productos.html">Productos</a></li>
+                            <li><a href="formulario.html">Registrate</a></li>
+                            <li><a href="adminProductos.html">Administacion de productos</a></li>
+               
+                        </ul>
+                </nav>
+        </header>
+
+    <!-- fin de la barra de nav -->
+
+    <div class="admin-container">
+        <h2>Gestion de productos - Terrier Life</h2>
+        <!-- Formulario para agregar o editar productos -->
+            <form id="productoForm">
+                <input type="text" id="nombre" placeholder="Nombre del producto" required>
+                <input type="text" id="precio" placeholder="Precio" required>
+                <input type="text" id="categoria" placeholder="Categoria" required>
+                <input type="text" id="imagen" placeholder="URL de imagen" required>
+                <button type="submit">Guardar</button>
+            </form>
+
+
+        <!-- Tabala para mostrar los productos -->
+        <h3>Listas de Sugerencia</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Categoria</th>
+                        <th>Imagen</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaProductos">
+                    <!-- Filas generadas por el JS -->
+                </tbody>
+            </table>
+    
+    </div>
+
+    
+    
+</body>
+<script src="js/script.js"></script>
+<footer>
+     <div class="container">
+        <div class="footer-row">
+      <div class="footer-links">
+        <h4 class="title-footer">Compañía</h4>
+        <ul>
+          <li><a href="#">Nosotros</a></li>
+          <li><a href="#">Nuestros servicios</a></li>
+          <li><a href="#">Política de privacidad</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h4 class="title-footer" >Ayuda</h4>
+        <ul>
+          <li><a href="#">Preguntas</a></li>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Compras</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links social">
+        <h4 class="title-footer">Síguenos</h4>
+        <div class="social-link">
+          <img src="logo/instagram.png" alt="logo ig">
+          <a href="#">Instagram</a>
+        </div>
+        <div class="social-link">
+          <img src="logo/facebook.png" alt="logo facebook">
+          <a href="#">Facebook</a>
+        </div>
+        <div class="social-link">
+          <img src="logo/whatsapp.png" alt="logo wsp">
+          <a href="#">Whatsapp</a>
+        </div>
+        <div class="social-link">
+          <img src="logo/twitter.png" alt="logo twitter">
+          <a href="#">Twitter</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</footer>
+</html>

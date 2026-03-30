@@ -1,0 +1,163 @@
+// nav de hamburguesa
+const nav = document.querySelector("#nav");
+const abrir = document.querySelector("#abrir");
+const cerrar = document.querySelector("#cerrar");
+
+abrir.addEventListener("click", () =>{
+    nav.classList.add("visible");
+})
+
+cerrar.addEventListener("click", () =>{
+    nav.classList.remove("visible");
+})
+
+//Captcha
+const generateCaptcha = () => {
+    let chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let captchaLength = 6;
+    let captcha = "";
+
+    for(let i = 0; i < captchaLength; i++){
+        let randomIndex = Math.floor(Math.random() * chars.length);
+        captcha += chars.charAt(randomIndex);
+    }
+
+    document.getElementById("captcha").innerHTML = captcha;
+    document.getElementById("userInput").value = "";
+    document.getElementById("result").innerHTML = "";
+}
+
+generateCaptcha();
+
+const validateCaptcha = () => {
+    let userInput = document.getElementById("userInput").value;
+    let captcha = document.getElementById("captcha").innerHTML;
+    let resultElement = document.getElementById("result");
+
+    if(userInput === captcha){
+        resultElement.innerHTML = "Captcha Completado.";
+        resultElement.style.color = "green";
+    }
+    else{
+        resultElement.innerHTML = "Captcha Incorrecto.";
+        resultElement.style.color = "red";
+    }
+};
+
+
+//Admin
+
+const API_URL = "https://685ea97d7b57aebd2afa3c19.mockapi.io/api/v1/productos";
+
+const tabla = document.querySelector('#tablaProductos');
+const form = document.getElementById('productoForm');
+
+let modoEdicion = false;
+let idProductoEditar = null;
+
+// Cargar productos
+async function cargarProductos() {
+  try {
+    const res = await fetch(API_URL);
+    const datos = await res.json();
+    tabla.innerHTML = '';
+    datos.forEach(producto => {
+      const fila = document.createElement('tr');
+      fila.innerHTML = `
+        <td data-label="Nombre">${producto.nombre}</td>
+        <td data-label="Precio">$${producto.precio}</td>
+        <td data-label="Categoría">${producto.categoria}</td>
+        <td data-label="Imagen"><img src="${producto.imagen}" width="50"></td>
+        <td data-label="Acciones">
+          <button onclick="editarProducto('${producto.id}')">Editar</button>
+          <button onclick="eliminarProducto('${producto.id}')">Eliminar</button>
+        </td>
+      `;
+      tabla.appendChild(fila);
+    });
+  } catch (error) {
+    console.error('Error al cargar productos:', error);
+    alert('Error al cargar productos desde la API');
+  }
+}
+
+// Agregar o editar producto
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const nombre = document.getElementById('nombre').value.trim();
+  const precio = document.getElementById('precio').value.trim();
+  const categoria = document.getElementById('categoria').value.trim();
+  const imagen = document.getElementById('imagen').value.trim();
+
+  if (!nombre || !precio || !categoria || !imagen) {
+    alert('Por favor, completa todos los campos');
+    return;
+  }
+
+  const productoData = { nombre, precio, categoria, imagen };
+
+  try {
+    if (modoEdicion) {
+      // Si está en modo edición: PUT
+      await fetch(`${API_URL}/${idProductoEditar}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(productoData),
+      });
+      modoEdicion = false;
+      idProductoEditar = null;
+      form.querySelector('button[type="submit"]').textContent = "Guardar";
+    } else {
+      // Si es nuevo: POST
+      await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(productoData),
+      });
+    }
+
+    form.reset();
+    cargarProductos();
+
+  } catch (error) {
+    console.error('Error al guardar producto:', error);
+    alert('No se pudo guardar el producto');
+  }
+});
+
+// Eliminar producto
+async function eliminarProducto(id) {
+  try {
+    await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+    cargarProductos();
+  } catch (error) {
+    console.error('Error al eliminar producto:', error);
+    alert('No se pudo eliminar el producto');
+  }
+}
+
+// Activar modo edición
+async function editarProducto(id) {
+  try {
+    const res = await fetch(`${API_URL}/${id}`);
+    const producto = await res.json();
+
+    document.getElementById('nombre').value = producto.nombre;
+    document.getElementById('precio').value = producto.precio;
+    document.getElementById('categoria').value = producto.categoria;
+    document.getElementById('imagen').value = producto.imagen;
+
+    modoEdicion = true;
+    idProductoEditar = id;
+
+    form.querySelector('button[type="submit"]').textContent = "Actualizar";
+
+  } catch (error) {
+    console.error('Error al preparar producto para editar:', error);
+    alert('No se pudo cargar el producto para editar');
+  }
+}
+
+// Inicial
+cargarProductos();

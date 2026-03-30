@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Registrate</title>
+</head>
+<body>
+    <!-- Barra de nav -->
+         <header>
+            <div class="logo">
+                <img src="logo/logotipoRaza.jpg" alt="logo raza">
+                <h1>Terrier Life</h1>
+            </div>
+
+            <button id= "abrir"class="abrir-menu">☰</button> 
+                <nav class="nav" id="nav">
+                    <button id="cerrar" class="cerrar-menu">✖</button>
+                        <ul class="nav-list">
+                            <li><a href="index.html">Inicio</a></li>
+                            <li><a href="miperro.html">Mi perrito</a></li>
+                            <li><a href="productos.html">Productos</a></li>
+                            <li><a href="formulario.html">Registrate</a></li>
+                            <li><a href="adminProductos.html">Administacion de productos</a></li>
+               
+                        </ul>
+                </nav>
+        </header>
+    <!-- Fin de la barra de nav -->
+
+    <!-- Contenido de la pagina -->
+        <h2>Registrate</h2>
+            <p class="registrate">
+                Registrate para obtener grandes descuentos en nuestro petShop
+            </p>
+
+    <!-- INICIO DEL FORMULARIO -->
+        <div class="formulario-container">
+            <form>
+                <h3>Contacto</h3>
+
+                <div class="input-group">
+                    <label for="name">Nombre</label>
+                    <input type="text" name="name" id="name" placeholder="Nombre">
+
+                    <label for="phone">Telefono</label>
+                    <input type="tel" name="phone" id="phone" placeholder="Telefono">
+
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Email">
+
+                    <label for="message">Mensaje</label>
+                    <textarea name="message" id="message" cols="30" rows="5" placeholder="Mensaje"></textarea>
+
+                        <div class="form-txt">
+                            <p>Politcas de privacidad</p>
+                            <p>Terminos y condiciones</p>
+                        </div>
+
+                    <input class="btn" type="submit" value="Enviar">
+
+
+
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Captcha -->
+    <div class="captcha-container">
+        <div class="wrapper">
+            <h2>Captcha</h2>
+            <div class="wrapper-captcha">
+                <div id="captcha"></div>
+                <button onclick="generateCaptcha()">
+                    <i class="fa-solid fa rotate-right">°</i>
+                </button>
+            </div>
+
+            <div class="wrapper-check">
+                <input type="text" id="userInput" placeholder="Enter captcha">
+                <button onclick="validateCaptcha()">Check</button>
+            </div>
+            <p id="result"></p>
+        </div>
+    </div>
+
+
+
+    
+</body>
+
+<script src="js/script.js"></script>
+<footer>
+     <div class="container">
+        <div class="footer-row">
+      <div class="footer-links">
+        <h4 class="title-footer">Compañía</h4>
+        <ul>
+          <li><a href="#">Nosotros</a></li>
+          <li><a href="#">Nuestros servicios</a></li>
+          <li><a href="#">Política de privacidad</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h4 class="title-footer" >Ayuda</h4>
+        <ul>
+          <li><a href="#">Preguntas</a></li>
+          <li><a href="#">Envíos</a></li>
+          <li><a href="#">Compras</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links social">
+        <h4 class="title-footer">Síguenos</h4>
+        <div class="social-link">
+          <img src="logo/instagram.png" alt="logo ig">
+          <a href="#">Instagram</a>
+        </div>
+        <div class="social-link">
+          <img src="logo/facebook.png" alt="logo facebook">
+          <a href="#">Facebook</a>
+        </div>
+        <div class="social-link">
+          <img src="logo/whatsapp.png" alt="logo wsp">
+          <a href="#">Whatsapp</a>
+        </div>
+        <div class="social-link">
+          <img src="logo/twitter.png" alt="logo twitter">
+          <a href="#">Twitter</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</footer>
+</html>
